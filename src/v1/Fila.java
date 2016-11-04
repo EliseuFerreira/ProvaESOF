@@ -5,45 +5,56 @@ import java.util.ArrayList;
 public class Fila {
 
 	ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
-	
-	public void addPessoa(Pessoa p){
+
+	public void addPessoa(Pessoa p) {
 		pessoas.add(p);
 	}
-	
-	public void removePessoa(Pessoa p){
+
+	public void removePessoa(Pessoa p) {
 		pessoas.remove(p);
 	}
-	
-	public Pessoa proximoFila(){
+
+	public Pessoa proximoFila() {
+
 		Pessoa proximo = null;
-		
-		proximo = verificaGravida();
-		
-		if(proximo == null)
-			proximo = pessoas.get(0);
-		
-		return proximo;
+		//Tratar se o método for igual a vazio
+		if (pessoas.isEmpty()) {
+
+			return proximo;
+		} else {
+			
+			//questão 5 solução prioridade idoso
+			proximo = verificaIdoso();
+
+			if (proximo == null) {
+				proximo = verificaGravida();
+				if (proximo == null) {
+					proximo = pessoas.get(0);
+				}
+
+			}
+
+			return proximo;
+		}
 	}
-	
-	public Pessoa verificaGravida(){
-		
-		for(Pessoa p: pessoas)
-		{
-			if(p.isGravida())
+
+	public Pessoa verificaGravida() {
+
+		for (Pessoa p : pessoas) {
+			if (p.isGravida())
 				return p;
 		}
-		
+
 		return null;
 	}
-	
-	public Pessoa verificaIdoso(){
-		
-		for(Pessoa p: pessoas)
-		{
-			if(p.isIdoso())
+
+	public Pessoa verificaIdoso() {
+
+		for (Pessoa p : pessoas) {
+			if (p.isIdoso())
 				return p;
 		}
-		
+
 		return null;
 	}
 }
